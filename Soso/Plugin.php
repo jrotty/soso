@@ -4,7 +4,7 @@
  * 
  * @package Soso
  * @author 泽泽社长
- * @version 1.1.0
+ * @version 1.1.1
  * @link http://qqdie.com/
  */
 class Soso_Plugin implements Typecho_Plugin_Interface
@@ -90,9 +90,10 @@ class Soso_Plugin implements Typecho_Plugin_Interface
 
   $searchQuery = '%' . str_replace(' ', '%', $keywords) . '%';
   $po = $obj->select()->join('table.relationships','table.relationships.cid = table.contents.cid','right')->join('table.metas','table.relationships.mid = table.metas.mid','right')->where('table.metas.type=?','category')
-           ->where("table.contents.password IS NULL OR table.contents.password = ''")
-           ->where('table.contents.title LIKE ? OR table.contents.text LIKE ?', $searchQuery, $searchQuery)
-           ->where('table.contents.type = ?', 'post')->group('cid'); 
+    ->where("table.contents.password IS NULL OR table.contents.password = ''")
+    ->where('table.contents.status = ?', 'publish')
+    ->where('table.contents.title LIKE ? OR table.contents.text LIKE ?', $searchQuery, $searchQuery)
+    ->where('table.contents.type = ?', 'post')->group('cid'); 
 //定制功能，用来根据分类id搜索内容，需模板代码配合才会启用
 if($cat>0){
  $po = $po->where('table.relationships.mid = ? OR table.metas.parent = ?',$cat,$cat);
