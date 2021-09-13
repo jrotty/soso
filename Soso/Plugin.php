@@ -4,7 +4,7 @@
  * 
  * @package Soso
  * @author 泽泽社长
- * @version 1.2.0
+ * @version 1.2.2
  * @link http://zezeshe.com/
  */
 class Soso_Plugin implements Typecho_Plugin_Interface
@@ -98,7 +98,7 @@ $Somo = Typecho_Widget::widget('Widget_Options')->plugin('Soso')->Somo;//获取�
 if(empty($count)){$count=1;}
 if(empty($time)){$time=60;}
 if(empty($txt)){$txt=$time."秒内只能搜索".$count."次，请稍后再试！";}
- $cat=intval($obj->request->cat);
+ $cat=intval($obj->request->get('cat'));
 
   $searchQuery = '%' . str_replace(' ', '%', $keywords) . '%';
 
