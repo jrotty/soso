@@ -4,8 +4,8 @@
  * 
  * @package Soso
  * @author 泽泽社长
- * @version 1.2.2
- * @link http://zezeshe.com/
+ * @version 1.2.3
+ * @link http://blog.zezeshe.com/
  */
 class Soso_Plugin implements Typecho_Plugin_Interface
 {
@@ -40,7 +40,7 @@ class Soso_Plugin implements Typecho_Plugin_Interface
     public static function config(Typecho_Widget_Helper_Form $form){
        $Somo = new Typecho_Widget_Helper_Form_Element_Radio('Somo',array('1' => _t('常规模式'),'2' => _t('仅搜索标题')),'1',_t('搜索模式'),_t(""));
        $form->addInput($Somo); 
-       $sid = new Typecho_Widget_Helper_Form_Element_Text('sid', NULL, NULL, _t('搜索结果不显示的分类'), _t('多个请用英文逗号隔开'));
+       $sid = new Typecho_Widget_Helper_Form_Element_Text('sid', NULL, NULL, _t('搜索结果不显示某分类'), _t('请填写分类mid，多个请用英文逗号隔开'));
         $form->addInput($sid);
       
       
