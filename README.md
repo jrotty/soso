@@ -16,4 +16,4 @@ typecho程序的搜索增强插件
 禁用旧版插件，删除旧版插件文件夹，然后上传最新版插件，启动插件设置插件即可
 
 ## 高级玩法
-详见https://zezeshe.com/archives/typecho-search-category.html
+搜索表单传递`?cat=分类mid`，即可按分类进行搜索，但翻页按钮需要自行追加`?cat=分类mid`参数，否则翻页后无效
