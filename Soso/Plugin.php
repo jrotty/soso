@@ -4,8 +4,8 @@
  * 
  * @package Soso
  * @author 泽泽社长
- * @version 1.2.3
- * @link http://blog.zezeshe.com/
+ * @version 1.2.5
+ * @link https://store.typecho.work/
  */
 class Soso_Plugin implements Typecho_Plugin_Interface
 {
@@ -90,10 +90,11 @@ class Soso_Plugin implements Typecho_Plugin_Interface
      * @return void
      */
     public static function soso($keywords, $obj) {
-$count=intval(Typecho_Widget::widget('Widget_Options')->plugin('Soso')->count);
-$time=Typecho_Widget::widget('Widget_Options')->plugin('Soso')->time;
-$txt=Typecho_Widget::widget('Widget_Options')->plugin('Soso')->txt;
-$Somo = Typecho_Widget::widget('Widget_Options')->plugin('Soso')->Somo;//获取设置参数
+$options=Helper::options();
+$count=intval($options->plugin('Soso')->count);
+$time=$options->plugin('Soso')->time;
+$txt=$options->plugin('Soso')->txt;
+$Somo = $options->plugin('Soso')->Somo;//获取设置参数
 
 if(empty($count)){$count=1;}
 if(empty($time)){$time=60;}
@@ -104,7 +105,7 @@ if(empty($txt)){$txt=$time."秒内只能搜索".$count."次，请稍后再试！
 
 
 
-if (!empty(Typecho_Widget::widget('Widget_Options')->plugin('Soso')->tuozhan) && in_array('pinlv',  Typecho_Widget::widget('Widget_Options')->plugin('Soso')->tuozhan)){
+if (!empty($options->plugin('Soso')->tuozhan) && in_array('pinlv',  $options->plugin('Soso')->tuozhan)){
 session_start();
 
 

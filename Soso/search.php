@@ -3,7 +3,9 @@
     ->where("table.contents.password IS NULL OR table.contents.password = ''")
     ->where('table.contents.status = ?', 'publish')
     ->where('table.contents.title LIKE ? OR table.contents.text LIKE ?', $searchQuery, $searchQuery)
-    ->where('table.contents.type = ?', 'post')->group('cid'); 
+    ->where('table.contents.type = ?', 'post')
+    ->where('table.contents.created < ?', $options->time)
+    ->group('cid'); 
 //定制功能，用来根据分类id搜索内容，需模板代码配合才会启用
 if($cat>0){
  $po = $po->where('table.relationships.mid = ? OR table.metas.parent = ?',$cat,$cat);
@@ -13,7 +15,7 @@ if($cat>0){
  if($Somo==2){
  $po = $po->where('table.contents.title LIKE ?', $searchQuery);//只允许搜索文章标题
  }
-       $sid = Typecho_Widget::widget('Widget_Options')->plugin('Soso')->sid;
+       $sid = $options->plugin('Soso')->sid;
       if(!$sid){}else{
  $sid = explode(',', $sid);
         $sid = array_unique($sid);  //去除重复值
