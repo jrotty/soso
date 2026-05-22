@@ -4,8 +4,8 @@
  * 
  * @package Soso
  * @author 泽泽社长
- * @version 1.2.5
- * @link https://store.typecho.work/
+ * @version 1.2.6
+ * @link https://typecho.fans/
  */
 class Soso_Plugin implements Typecho_Plugin_Interface
 {

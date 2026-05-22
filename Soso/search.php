@@ -5,7 +5,7 @@
     ->where('table.contents.title LIKE ? OR table.contents.text LIKE ?', $searchQuery, $searchQuery)
     ->where('table.contents.type = ?', 'post')
     ->where('table.contents.created < ?', $options->time)
-    ->group('cid'); 
+    ->group('table.contents.cid, table.relationships.mid, table.metas.mid');
 //定制功能，用来根据分类id搜索内容，需模板代码配合才会启用
 if($cat>0){
  $po = $po->where('table.relationships.mid = ? OR table.metas.parent = ?',$cat,$cat);
