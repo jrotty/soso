@@ -1,11 +1,30 @@
 <?php
-  $po = $obj->select()->join('table.relationships','table.relationships.cid = table.contents.cid','right')->join('table.metas','table.relationships.mid = table.metas.mid','right')->where('table.metas.type=?','category')
+  $po = $obj->select(
+            'table.contents.cid',
+            'table.contents.title',
+            'table.contents.slug',
+            'table.contents.created',
+            'table.contents.authorId',
+            'table.contents.modified',
+            'table.contents.type',
+            'table.contents.status',
+            'table.contents.text',
+            'table.contents.commentsNum',
+            'table.contents.order',
+            'table.contents.template',
+            'table.contents.password',
+            'table.contents.allowComment',
+            'table.contents.allowPing',
+            'table.contents.allowFeed',
+            'table.contents.parent')
+  ->join('table.relationships','table.relationships.cid = table.contents.cid','right')
+  ->join('table.metas','table.relationships.mid = table.metas.mid','right')->where('table.metas.type=?','category')
     ->where("table.contents.password IS NULL OR table.contents.password = ''")
     ->where('table.contents.status = ?', 'publish')
     ->where('table.contents.title LIKE ? OR table.contents.text LIKE ?', $searchQuery, $searchQuery)
     ->where('table.contents.type = ?', 'post')
     ->where('table.contents.created < ?', $options->time)
-    ->group('table.contents.cid, table.relationships.mid, table.metas.mid');
+    ->group('table.contents.cid');
 //定制功能，用来根据分类id搜索内容，需模板代码配合才会启用
 if($cat>0){
  $po = $po->where('table.relationships.mid = ? OR table.metas.parent = ?',$cat,$cat);
